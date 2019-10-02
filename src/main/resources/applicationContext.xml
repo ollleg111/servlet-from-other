@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+    <context:component-scan base-package="com"/>
+
+    <bean id="testingBean" class="com.aaa.TestBean">
+        <constructor-arg value="it is alive"/>
+    </bean>
+
+    <bean id="musicBean" class="com.bbb.ClassicalMusic"/>
+    <!--    <bean id="musicBean" class="com.bbb.RockMusic"/>-->
+
+    <bean id="musicPlayer" class="com.bbb.MusicPlayer">
+        <constructor-arg ref="musicBean"/>
+    </bean>
+
+    <context:property-placeholder location="classpath:musicPlayer.properties"/>
+
+    <bean id="musicPlayer2" class="com.ccc.MusicPlayer">
+        <property name="music" ref="musicBean"/>
+        <!--        <property name="name" value="Some name"/>-->
+        <!--        <property name="volume" value="50"/> -->
+        <property name="name" value="${musicPlayer.name}"/>
+        <property name="volume" value="${musicPlayer.volume}"/>
+    </bean>
+
+    <bean id="musicPlayer3" class="com.ddd.MusicPlayer">
+        <property name="music">
+            <list>
+                <ref bean="classic"/>
+                <ref bean="rock"/>
+                <ref bean="pop"/>
+            </list>
+        </property>
+        <property name="name" value="${musicPlayer.name}"/>
+        <property name="volume" value="${musicPlayer.volume}"/>
+    </bean>
+
+    <bean id="pop" class="com.ddd.PopMusic"/>
+    <bean id="rock" class="com.ddd.RockMusic"/>
+    <bean id="classic" class="com.ddd.ClassicalMusic"/>
+
+</beans>
