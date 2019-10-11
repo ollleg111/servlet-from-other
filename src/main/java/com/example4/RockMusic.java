@@ -1,4 +1,4 @@
-package com.ddd;
+package com.example4;
 
 public class RockMusic implements Music {
 

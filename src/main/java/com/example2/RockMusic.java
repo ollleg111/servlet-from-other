@@ -1,6 +1,4 @@
-package com.bbb;
-
-import com.bbb.Music;
+package com.example2;
 
 public class RockMusic implements Music {
     @Override

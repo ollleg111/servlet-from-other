@@ -1,4 +1,4 @@
-package com.ddd;
+package com.example4;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,9 @@ public class MusicPlayer {
         this.music = music;
         this.name = name;
         this.volume = volume;
+    }
+
+    public MusicPlayer(Music musicBean) {
     }
 
     public List<Music> getMusic() {

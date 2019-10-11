@@ -1,6 +1,4 @@
-package com.bbb;
-
-import com.bbb.Music;
+package com.example4;
 
 public class ClassicalMusic implements Music {
 

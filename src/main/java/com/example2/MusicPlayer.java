@@ -1,4 +1,4 @@
-package com.bbb;
+package com.example2;
 
 public class MusicPlayer {
     private Music music;

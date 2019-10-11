@@ -1,6 +1,6 @@
-package com.ccc;
+package com.example3;
 
-import com.bbb.Music;
+import com.example2.Music;
 
 public class MusicPlayer {
     private Music music;
