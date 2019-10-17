@@ -9,28 +9,30 @@
 
     <context:component-scan base-package="com"/>
 
-    <bean id="testingBean" class="com.aaa.TestBean">
+    <bean id="testingBean" class="com.example1.TestBean">
         <constructor-arg value="it is alive"/>
     </bean>
 
-    <bean id="musicBean" class="com.bbb.ClassicalMusic"/>
-    <!--    <bean id="musicBean" class="com.bbb.RockMusic"/>-->
+    <bean id="musicBean" class="com.example2.ClassicalMusic"/>
+    <!--    <bean id="musicBean" class="com.example2.RockMusic"/>-->
 
-    <bean id="musicPlayer" class="com.bbb.MusicPlayer">
+    <bean id="musicPlayer" class="com.example2.MusicPlayer">
         <constructor-arg ref="musicBean"/>
     </bean>
 
     <context:property-placeholder location="classpath:musicPlayer.properties"/>
 
-    <bean id="musicPlayer2" class="com.ccc.MusicPlayer">
+    <bean id="musicPlayer2" class="com.example3.MusicPlayer">
         <property name="music" ref="musicBean"/>
-        <!--        <property name="name" value="Some name"/>-->
-        <!--        <property name="volume" value="50"/> -->
-        <property name="name" value="${musicPlayer.name}"/>
-        <property name="volume" value="${musicPlayer.volume}"/>
+        <property name="name" value="Some name"/>
+        <property name="volume" value="50"/>
+
+        <!--        <property name="name" value="${musicPlayer.name}"/>-->
+        <!--        <property name="volume" value="${musicPlayer.volume}"/>-->
+
     </bean>
 
-    <bean id="musicPlayer3" class="com.ddd.MusicPlayer">
+    <bean id="musicPlayer3" class="com.example4.MusicPlayer">
         <property name="music">
             <list>
                 <ref bean="classic"/>
@@ -42,8 +44,14 @@
         <property name="volume" value="${musicPlayer.volume}"/>
     </bean>
 
-    <bean id="pop" class="com.ddd.PopMusic"/>
-    <bean id="rock" class="com.ddd.RockMusic"/>
-    <bean id="classic" class="com.ddd.ClassicalMusic"/>
+    <bean id="pop" class="com.example4.PopMusic"/>
+    <bean id="rock" class="com.example4.RockMusic"/>
+    <bean id="classic" class="com.example4.ClassicalMusic"/>
+
+    <bean id="music" class="com.example4.RockMusic" init-method="doMyInit" destroy-method="doDestroy"/>
+
+    <bean id="musicWithPrototype" class="com.example4.PopMusic" init-method="doMyInit" destroy-method="doDestroy" scope="prototype"/>
+
+    <bean id="musicWithFabric" class="com.example4.ClassicalMusic" factory-method="getClassicalMusic"/>
 
 </beans>

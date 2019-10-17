@@ -1,8 +1,6 @@
 package com;
 
-
-import com.example1.TestBean;
-
+import com.example4.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class TestSpring {
@@ -61,5 +59,50 @@ public class TestSpring {
 //
 //        classContext.close();
 
+        // -eee
+        //пример реализации методов инит и дестрой, они прописываются в бине
+        //<bean id="music" class="com.example4.ClassicalMusic" init-method="doMyInit" destroy-method="doDestroy"/>
+
+        //при использовании скопе - синглтон (по умолчанию) инициализауия один и дестрой - один раз
+
+//        ClassPathXmlApplicationContext classContext = new ClassPathXmlApplicationContext(
+//                "applicationContext.xml"
+//        );
+//
+//        RockMusic rockMusic = classContext.getBean("music", RockMusic.class);
+//        System.out.println("Singing: The " + rockMusic.getSong());
+//
+//        RockMusic rockMusic1 = classContext.getBean("music", RockMusic.class);
+//        System.out.println("Singing: The " + rockMusic1.getSong());
+//
+//        System.out.println("-----------------------------------");
+//        //для бинов со скопом prototype Spring не вызывает destroy метод
+//        //при использовании скоп - прототип - инициализация при каждом обращении к бину
+//        //<bean id="musicWithPrototype" class="com.example4.PopMusic" init-method="doMyInit" destroy-method="doDestroy" scope="prototype"/>
+//
+//        PopMusic popMusic = classContext.getBean("musicWithPrototype", PopMusic.class);
+//        System.out.println("Singing: The " + popMusic.getSong());
+//
+//        PopMusic popMusic1 = classContext.getBean("musicWithPrototype", PopMusic.class);
+//        System.out.println("Singing: The " + popMusic1.getSong());
+//
+//        classContext.close();
+
+        // -fff
+        //использование фабричного метода
+        //в классе ClassicalMusic делаем приватный консктруктор
+        //прописываем фабричный метод в бине
+//        <bean id="musicWithFabric" class="com.example4.ClassicalMusic" factory-method="getClassicalMusic"/>
+        //это СИНГЛТОН !!!!! всегда возвращается один и тот же объект
+
+
+        ClassPathXmlApplicationContext classContext = new ClassPathXmlApplicationContext(
+                "applicationContext.xml"
+        );
+
+        Music classicalMusic = classContext.getBean("musicWithFabric", ClassicalMusic.class);
+        System.out.println("Singing: The " + classicalMusic.getSong());
+
+        classContext.close();
     }
 }
