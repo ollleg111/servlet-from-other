@@ -7,8 +7,6 @@
          http://www.springframework.org/schema/context
          http://www.springframework.org/schema/context/spring-context-4.1.xsd">
 
-    <context:component-scan base-package="com"/>
-
     <bean id="testingBean" class="com.example1.TestBean">
         <constructor-arg value="it is alive"/>
     </bean>
@@ -16,11 +14,15 @@
     <bean id="musicBean" class="com.example2.ClassicalMusic"/>
     <!--    <bean id="musicBean" class="com.example2.RockMusic"/>-->
 
+    <!-- передача бина с помощью конструтора в качестве аргумента
+        в xml в бине конструкция - <constructor>-->
+
     <bean id="musicPlayer" class="com.example2.MusicPlayer">
         <constructor-arg ref="musicBean"/>
     </bean>
 
-    <context:property-placeholder location="classpath:musicPlayer.properties"/>
+    <!-- передача бина с set (сетера) в качестве аргумента
+        в xml в бине конструкция - <property>-->
 
     <bean id="musicPlayer2" class="com.example3.MusicPlayer">
         <property name="music" ref="musicBean"/>
@@ -31,6 +33,10 @@
         <!--        <property name="volume" value="${musicPlayer.volume}"/>-->
 
     </bean>
+
+    <!-- передача данных из внешнего файла-->
+    <context:property-placeholder location="classpath:musicPlayer.properties"/>
+
 
     <bean id="musicPlayer3" class="com.example4.MusicPlayer">
         <property name="music">
@@ -44,14 +50,35 @@
         <property name="volume" value="${musicPlayer.volume}"/>
     </bean>
 
+    <!-- инициализация бинов для example4-->
     <bean id="pop" class="com.example4.PopMusic"/>
     <bean id="rock" class="com.example4.RockMusic"/>
     <bean id="classic" class="com.example4.ClassicalMusic"/>
 
-    <bean id="music" class="com.example4.RockMusic" init-method="doMyInit" destroy-method="doDestroy"/>
+    <bean id="music"
+          class="com.example4.RockMusic"
+          init-method="doMyInit"
+          destroy-method="doDestroy"/>
 
-    <bean id="musicWithPrototype" class="com.example4.PopMusic" init-method="doMyInit" destroy-method="doDestroy" scope="prototype"/>
+    <!-- внутри описание инит и дестрой метода, а также скоп - прототайп-->
+    <bean id="musicWithPrototype"
+          class="com.example4.PopMusic"
+          init-method="doMyInit"
+          destroy-method="doDestroy"
+          scope="prototype"/>
 
-    <bean id="musicWithFabric" class="com.example4.ClassicalMusic" factory-method="getClassicalMusic"/>
+    <!-- создание бина с помощью фабричного метода-->
+    <bean id="musicWithFabric"
+          class="com.example4.ClassicalMusic"
+          factory-method="getClassicalMusic"/>
+
+<!--    <context:component-scan base-package="com.example5"/>-->
+
+    <!-- внедрение зависимостей через @Autowired-->
+<!--    <context:component-scan base-package="com.example6"/>-->
+
+    <!-- уточнение зависимости через @Qualifier-->
+    <context:component-scan base-package="com.example7"/>
+
 
 </beans>
