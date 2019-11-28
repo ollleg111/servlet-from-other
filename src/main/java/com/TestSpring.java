@@ -1,8 +1,7 @@
 package com;
 
-import com.example7.Computer;
-import com.example7.MusicPlayer;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import com.example10.*;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class TestSpring {
     public static void main(String[] args) {
@@ -104,7 +103,7 @@ public class TestSpring {
          */
 // --------------------------------------------------------
 
-          // -example4
+        // -example4
 //        //для бинов со скопом prototype Spring не вызывает destroy метод
 //        //при использовании скоп - прототип - инициализация при каждом обращении к бину
 
@@ -176,7 +175,7 @@ public class TestSpring {
                 "applicationContext.xml"
         );
 
-        MusicPlayer musicPlayer = classContext.getBean("musicPlayerExample6", MusicPlayer.class);
+        MusicPlayer musicPlayer = classContext.getBean("musicPlayer6", MusicPlayer.class);
         musicPlayer.playMusic();
 
         // добавление нового класса бином и подключение к нему
@@ -189,10 +188,105 @@ public class TestSpring {
         // -example7
         // уточнение зависимости через @Qualifier
 
+//        ClassPathXmlApplicationContext classContext = new ClassPathXmlApplicationContext(
+//                "applicationContext.xml"
+//        );
+//        Computer computer = classContext.getBean("computer", Computer.class);
+//        System.out.println(computer);
+//
+//        classContext.close();
+        // --------------------------------------------------------
+
+        // -example8
+        // добавление новых аннотаций
+
+        /*
         ClassPathXmlApplicationContext classContext = new ClassPathXmlApplicationContext(
                 "applicationContext.xml"
         );
+
         Computer computer = classContext.getBean("computer", Computer.class);
         System.out.println(computer);
+
+//        MusicPlayer musicPlayer = classContext.getBean("musicPlayer8", MusicPlayer.class);
+//        musicPlayer.getName();
+//        musicPlayer.getVolume();
+
+        // проверка анноации @Scope - singleton
+        ClassicalMusic classicalMusic1 = classContext.getBean("classicalMusic", ClassicalMusic.class);
+        ClassicalMusic classicalMusic2 = classContext.getBean("classicalMusic", ClassicalMusic.class);
+
+        System.out.println("__________________________________");
+        System.out.println(classicalMusic1 == classicalMusic2);
+        System.out.println("__________________________________");
+
+        // проверка анноации @Scope - prototype
+        RockMusic rockMusic1 = classContext.getBean("rockMusic", RockMusic.class);
+        RockMusic rockMusic2 = classContext.getBean("rockMusic", RockMusic.class);
+
+        System.out.println(rockMusic1 == rockMusic2);
+        System.out.println("__________________________________");
+
+        classContext.close();
+         */
+        // --------------------------------------------------------
+
+        // -example9
+        // создание бинов через java контекст, но с аннотациями
+        /*
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+
+        Computer computer = context.getBean("computer", Computer.class);
+        System.out.println(computer);
+
+        MusicPlayer musicPlayer = context.getBean("musicPlayer9", MusicPlayer.class);
+        System.out.println("Name: " + musicPlayer.getName());
+        System.out.println("Volume: " + musicPlayer.getVolume());
+
+        // проверка анноации @Scope - singleton
+        ClassicalMusic classicalMusic1 = context.getBean("classicalMusic", ClassicalMusic.class);
+        ClassicalMusic classicalMusic2 = context.getBean("classicalMusic", ClassicalMusic.class);
+
+        System.out.println("__________________________________");
+        System.out.println(classicalMusic1 == classicalMusic2);
+        System.out.println("__________________________________");
+
+        // проверка анноации @Scope - prototype
+        RockMusic rockMusic1 = context.getBean("rockMusic", RockMusic.class);
+        RockMusic rockMusic2 = context.getBean("rockMusic", RockMusic.class);
+
+        System.out.println(rockMusic1 == rockMusic2);
+        System.out.println("__________________________________");
+
+        context.close();
+        */
+
+        // -example10
+        // создание бинов через java контекст, ВРУЧНУЮ в файлке конфигурации
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
+
+        Computer computer = context.getBean("computer", Computer.class);
+        System.out.println(computer);
+
+        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
+        System.out.println("Name: " + musicPlayer.getName());
+        System.out.println("Volume: " + musicPlayer.getVolume());
+
+        // проверка анноации @Scope - singleton
+        ClassicalMusic classicalMusic1 = context.getBean("classicalMusic", ClassicalMusic.class);
+        ClassicalMusic classicalMusic2 = context.getBean("classicalMusic", ClassicalMusic.class);
+
+        System.out.println("__________________________________");
+        System.out.println(classicalMusic1 == classicalMusic2);
+        System.out.println("__________________________________");
+
+        // проверка анноации @Scope - prototype
+        RockMusic rockMusic1 = context.getBean("rockMusic", RockMusic.class);
+        RockMusic rockMusic2 = context.getBean("rockMusic", RockMusic.class);
+
+        System.out.println(rockMusic1 == rockMusic2);
+        System.out.println("__________________________________");
+
+        context.close();
     }
 }

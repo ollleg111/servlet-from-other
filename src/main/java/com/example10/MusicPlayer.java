@@ -1,27 +1,24 @@
-package com.example7;
+package com.example10;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 
-@Component("musicPlayer7")
 public class MusicPlayer {
-    // пример с полем
-    /*
-    @Autowired
-    @Qualifier("rockMusic")
-    private Music music;
 
-    public String playMusic() {
-        return "Playing: " + music.getSong();
+    private String name;
+    private int volume;
+
+    public String getName() {
+        return name;
     }
-     */
 
-    // пример с констркктором
+    public int getVolume() {
+        return volume;
+    }
 
+
+    // пример с констуктором
     Music music1, music2, music3;
 
-    @Autowired
     public MusicPlayer(@Qualifier("classicalMusic") Music music1,
                        @Qualifier("rockMusic") Music music2,
                        @Qualifier("popMusic") Music music3) {

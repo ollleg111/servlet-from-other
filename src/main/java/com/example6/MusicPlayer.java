@@ -3,7 +3,7 @@ package com.example6;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component("musicPlayerExample6")
+@Component("musicPlayer6")
 public class MusicPlayer {
 
 //    private Music music;

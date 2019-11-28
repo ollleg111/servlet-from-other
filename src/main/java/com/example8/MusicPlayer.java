@@ -1,10 +1,11 @@
-package com.example7;
+package com.example8;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component("musicPlayer7")
+@Component("musicPlayer8")
 public class MusicPlayer {
     // пример с полем
     /*
@@ -17,8 +18,22 @@ public class MusicPlayer {
     }
      */
 
-    // пример с констркктором
+//    @Value("${musicPlayer.name}")
+//    private String name;
+//
+//    @Value("${musicPlayer.value}")
+//    private int volume;
+//
+//    public String getName() {
+//        return name;
+//    }
+//
+//    public int getVolume() {
+//        return volume;
+//    }
 
+
+    // пример с констуктором
     Music music1, music2, music3;
 
     @Autowired
